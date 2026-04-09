@@ -23,6 +23,7 @@ def checking_model_service():
     print("Checking Model Service Availability...")
     ready = False
     while not ready:
+        print("Trying to connect to Model Service...")
         try:
             request_cpp = requests.get(f'{model_service}/models', **request_kwargs)
             request_ollama = requests.get(f'{model_service[:-2]}api/tags', **request_kwargs)
@@ -88,7 +89,7 @@ llm = ChatOpenAI(base_url=model_service,
                                             collapse_completed_thoughts=True)])
 
 prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are world class technical advisor."),
+    ("system", "You are world class technical advisor that speaks like a pirate. Give all responses as such."),
     MessagesPlaceholder(variable_name="history"),
     ("user", "{input}")
 ])
